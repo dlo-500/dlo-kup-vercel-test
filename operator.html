@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com;">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<title>Operator Login — District Litigation Office Kupwara</title>
+<link rel="preconnect" href="https://script.google.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* ── Ledger & Seal palette ── */
+  --paper:#F2EAD3; --paper-2:#EAE0C0; --paper-3:#E2D6AE;
+  --ink:#1B2340; --ink-2:#262F52; --ink-3:#323C68;
+  --brass:#A6763D; --brass-light:#C99A56; --brass-dim:#8C6633;
+  --seal-red:#A13A2E; --seal-red-ink:#7E2C22;
+  --seal-green:#2E6B4E; --seal-green-ink:#204B37;
+  --text:#211C10; --muted:#7C7358; --line:#D7C7A0; --line-soft:#E4D8B4;
+  --white:#FFFDF7; --danger:#A13A2E;
+  --font-display:'Fraunces',serif; --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+}
+body{font-family:var(--font-body);background:
+    radial-gradient(ellipse at top left, rgba(166,118,61,0.07), transparent 55%),
+    radial-gradient(ellipse at bottom right, rgba(27,35,64,0.06), transparent 55%),
+    var(--paper);
+  color:var(--text);min-height:100vh}
+
+/* ── Ledger-spine topbar ── */
+.topbar{background:var(--ink);border-bottom:3px solid var(--brass);padding:14px 26px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 2px 0 rgba(166,118,61,0.35)}
+.topbar .brand{display:flex;align-items:center;gap:12px}
+.seal-emblem{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--brass-light),var(--brass) 60%,var(--brass-dim));display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(233,213,163,0.25), inset 0 -2px 4px rgba(0,0,0,0.25)}
+.seal-emblem svg{width:20px;height:20px}
+.topbar h1{font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--white);letter-spacing:0.2px}
+.topbar p{font-family:var(--font-mono);font-size:9.5px;color:var(--brass-light);letter-spacing:1.8px;text-transform:uppercase;margin-top:2px}
+.btn-logout{background:rgba(255,255,255,0.08);border:1px solid rgba(233,213,163,0.3);color:var(--white);padding:8px 16px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;display:none;font-family:var(--font-body);transition:background .15s}
+.btn-logout:hover{background:rgba(255,255,255,0.16)}
+.btn-logout.visible{display:inline-block}
+.wrap{max-width:1120px;margin:0 auto;padding:30px 20px 60px}
+
+/* ── LOGIN ── */
+.login-screen{min-height:82vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.login-card{background:var(--white);border-radius:4px;box-shadow:0 30px 70px rgba(27,35,64,0.28);width:100%;max-width:390px;overflow:hidden;position:relative;border:1px solid var(--line)}
+.login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:repeating-linear-gradient(90deg,var(--brass) 0 10px,var(--brass-light) 10px 20px)}
+.login-card .hd{background:var(--ink);padding:34px 28px 24px;text-align:center;border-bottom:3px solid var(--brass);position:relative}
+.login-card .hd .seal-emblem{width:54px;height:54px;margin:0 auto 14px;box-shadow:0 0 0 3px rgba(233,213,163,0.2), inset 0 -3px 6px rgba(0,0,0,0.3), 0 6px 16px rgba(0,0,0,0.35)}
+.login-card .hd .seal-emblem svg{width:28px;height:28px}
+.login-card .hd h2{font-family:var(--font-display);font-weight:700;color:var(--white);font-size:19px}
+.login-card .hd p{font-family:var(--font-mono);font-size:10px;color:var(--brass-light);letter-spacing:1.6px;text-transform:uppercase;margin-top:6px}
+.login-card .bd{padding:30px 28px 28px}
+.field{margin-bottom:17px}
+.field label{display:block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--muted);margin-bottom:6px;font-family:var(--font-body)}
+.field input{width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:5px;font-size:14px;font-family:var(--font-body);background:var(--paper);color:var(--text);transition:border-color .15s, box-shadow .15s}
+.field input:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(166,118,61,0.15)}
+.btn-primary{background:var(--ink);color:var(--white);font-weight:600;font-size:13.5px;padding:13px;border-radius:5px;border:1.5px solid var(--ink);cursor:pointer;width:100%;transition:all .15s;font-family:var(--font-body);letter-spacing:0.3px}
+.btn-primary:hover{background:var(--ink-3);border-color:var(--ink-3)}
+.btn-primary:disabled{opacity:0.55;cursor:not-allowed}
+.error-msg{background:#F6E4E0;color:var(--seal-red-ink);border:1px solid #E3B7AC;border-radius:5px;padding:10px 14px;font-size:13px;margin-bottom:16px;display:none}
+.error-msg.show{display:block}
+
+/* ── DASHBOARD / WELCOME ── */
+.dashboard{display:none}
+.dashboard.visible{display:block}
+.welcome-bar{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;margin-bottom:26px;padding-bottom:18px;border-bottom:2px solid var(--line)}
+.welcome-bar h2{font-family:var(--font-display);font-weight:700;font-size:26px;color:var(--ink);letter-spacing:0.2px}
+.welcome-bar .sub{font-size:13px;color:var(--muted);margin-top:4px;font-family:var(--font-body)}
+.welcome-bar .today{font-family:var(--font-mono);font-size:11px;color:var(--brass-dim);background:rgba(166,118,61,0.1);border:1px solid rgba(166,118,61,0.3);padding:6px 12px;border-radius:20px;letter-spacing:0.3px;white-space:nowrap}
+
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.card{background:var(--white);border-radius:4px;border:1px solid var(--line);border-top:3px solid var(--ink-3);padding:20px;text-align:center;box-shadow:0 2px 10px rgba(27,35,64,0.05);position:relative}
+.card .num{font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.card .lbl{font-size:11px;color:var(--muted);margin-top:5px;letter-spacing:0.8px;text-transform:uppercase;font-family:var(--font-body)}
+.card.pending{border-top-color:var(--brass)}
+.card.pending .num{color:var(--brass-dim)}
+.card.updated{border-top-color:var(--seal-green)}
+.card.updated .num{color:var(--seal-green-ink)}
+.card.overdue{border-top-color:var(--seal-red)}
+.card.overdue .num{color:var(--seal-red-ink)}
+.overdue-badge{font-family:var(--font-mono);font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:3px;background:rgba(161,58,46,0.1);color:var(--seal-red-ink);border:1.5px solid rgba(161,58,46,0.35);white-space:nowrap}
+
+.search-box{background:var(--white);border-radius:4px;border:1px solid var(--line);padding:16px 18px;margin-bottom:26px;display:flex;gap:10px;flex-wrap:wrap}
+.search-box input{flex:1;min-width:220px;padding:10px 14px;border:1.5px solid var(--line);border-radius:5px;font-size:14px;font-family:var(--font-body);background:var(--paper)}
+.search-box input:focus{outline:none;border-color:var(--brass)}
+.search-box button{background:var(--ink);color:var(--white);border:1.5px solid var(--ink);padding:10px 20px;border-radius:5px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:background .15s}
+.search-box button:hover{background:var(--ink-3)}
+
+.section-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-title .count-tag{font-family:var(--font-mono);font-size:11px;background:var(--ink);color:var(--white);padding:2px 9px;border-radius:20px;font-weight:500}
+
+table{width:100%;border-collapse:collapse;background:var(--white);border-radius:4px;overflow:hidden;box-shadow:0 2px 10px rgba(27,35,64,0.05);border:1px solid var(--line)}
+th{background:var(--ink);color:var(--brass-light);font-size:10.5px;text-transform:uppercase;letter-spacing:0.7px;padding:12px;text-align:left;font-family:var(--font-body);font-weight:600}
+td{padding:12px;font-size:13px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+td.mono{font-family:var(--font-mono);font-size:12px;color:var(--ink-2)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(166,118,61,0.045)}
+
+/* ── Stamp-style status pills (signature element) ── */
+.status-pill{font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:3px;display:inline-block;text-transform:uppercase;letter-spacing:0.6px;border:1.5px solid transparent;font-family:var(--font-mono)}
+.status-pill.Pending{background:rgba(161,58,46,0.08);color:var(--seal-red-ink);border-color:rgba(161,58,46,0.35)}
+.status-pill.Updated{background:rgba(46,107,78,0.08);color:var(--seal-green-ink);border-color:rgba(46,107,78,0.4);transform:rotate(-3deg)}
+.status-pill.Updated.stamp-in{animation:stampDown .38s cubic-bezier(.2,1.4,.4,1)}
+@keyframes stampDown{
+  0%{transform:rotate(-3deg) scale(2.2);opacity:0;filter:blur(1px)}
+  55%{transform:rotate(-4deg) scale(0.92);opacity:1}
+  100%{transform:rotate(-3deg) scale(1);opacity:1}
+}
+
+.btn-update{background:var(--white);color:var(--ink);border:1.5px solid var(--ink);padding:7px 15px;border-radius:4px;font-size:11.5px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:0.4px;font-family:var(--font-body);transition:all .15s}
+.btn-update:hover:not(:disabled){background:var(--ink);color:var(--white)}
+.btn-update:disabled{opacity:0.4;cursor:not-allowed;border-color:var(--line)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px;background:var(--white);border-radius:4px;border:1px dashed var(--line)}
+.table-wrap{margin-bottom:32px;overflow-x:auto}
+
+/* ── skeleton loaders for perceived speed ── */
+.skeleton-row{display:grid;grid-template-columns:90px 1fr 1fr 2fr 1fr 1fr 90px;gap:12px;padding:13px 12px;border-bottom:1px solid var(--line-soft);background:var(--white)}
+.skeleton-row:first-child{border-top-left-radius:4px;border-top-right-radius:4px}
+.skel-bar{height:12px;border-radius:3px;background:linear-gradient(90deg,var(--paper-3) 25%,var(--paper-2) 37%,var(--paper-3) 63%);background-size:400% 100%;animation:shimmer 1.3s ease-in-out infinite}
+@keyframes shimmer{0%{background-position:100% 0}100%{background-position:0 0}}
+.skeleton-wrap{border:1px solid var(--line);border-radius:4px;overflow:hidden}
+
+/* ── MODAL ── */
+.overlay{position:fixed;inset:0;background:rgba(27,35,64,0.55);z-index:300;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+.overlay.open{display:flex}
+.modal{background:var(--white);border-radius:6px;max-width:580px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 40px 90px rgba(0,0,0,0.4)}
+.modal-hd{background:var(--ink);padding:18px 24px;border-radius:6px 6px 0 0;border-bottom:3px solid var(--brass);display:flex;justify-content:space-between;align-items:center}
+.modal-hd h3{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--white)}
+.modal-close{background:none;border:none;color:rgba(255,255,255,0.6);font-size:22px;cursor:pointer;line-height:1}
+.modal-close:hover{color:var(--white)}
+.modal-bd{padding:24px}
+.ro-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:16px}
+.ro-field label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--brass-dim);display:block;margin-bottom:3px;font-family:var(--font-body)}
+.ro-field p{font-size:13px;color:var(--text);font-family:var(--font-mono)}
+.ro-field.full{grid-column:1/-1}
+.field textarea{width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:5px;font-size:13px;font-family:var(--font-body);min-height:84px;resize:vertical;background:var(--paper)}
+.field textarea:focus,.field input[type=date]:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(166,118,61,0.15)}
+.field input[type=date]{width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:5px;font-size:14px;font-family:var(--font-body);background:var(--paper)}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--line)}
+.btn-secondary{background:var(--paper);color:var(--text);border:1.5px solid var(--line);padding:10px 16px;border-radius:5px;font-size:13px;cursor:pointer;font-family:var(--font-body);font-weight:500;transition:all .15s}
+.btn-secondary:hover{background:var(--paper-3)}
+
+/* ── SUCCESS / TOAST ── */
+.success-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:18px;padding:14px;background:rgba(46,107,78,0.07);border:1px solid rgba(46,107,78,0.3);border-radius:5px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--seal-green-ink);color:var(--white);padding:13px 24px;border-radius:6px;font-size:13px;font-weight:600;box-shadow:0 10px 28px rgba(0,0,0,0.3);z-index:400;display:none;font-family:var(--font-body)}
+.toast.show{display:block;animation:toastIn .25s ease}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+.toast.err{background:var(--seal-red-ink)}
+
+.spinner{text-align:center;padding:34px;color:var(--muted);font-size:13px;font-family:var(--font-body)}
+@media(max-width:680px){.cards{grid-template-columns:1fr}.ro-grid{grid-template-columns:1fr}.skeleton-row{grid-template-columns:1fr 1fr}.welcome-bar{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="seal-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="#1B2340" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l-3 6a4 4 0 0 0 8 0l-3-6M19 8l-3 6a4 4 0 0 0 8 0l-3-6M5 8h14M8 21h8"/></svg></div>
+    <div>
+      <h1>Operator Portal</h1>
+      <p>District Litigation Office · Kupwara</p>
+    </div>
+  </div>
+  <button class="btn-logout" id="logoutBtn" onclick="logout()">Sign Out</button>
+</div>
+
+<!-- ═══════════ LOGIN SCREEN ═══════════ -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="hd">
+      <div class="seal-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="#F2EAD3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l-3 6a4 4 0 0 0 8 0l-3-6M19 8l-3 6a4 4 0 0 0 8 0l-3-6M5 8h14M8 21h8"/></svg></div>
+      <h2>Operator Login</h2>
+      <p>Proceedings Update Register</p>
+    </div>
+    <div class="bd">
+      <div class="error-msg" id="loginError"></div>
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="loginUsername" autocomplete="username" onkeydown="if(event.key==='Enter')document.getElementById('loginPassword').focus()">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="loginPassword" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
+      </div>
+      <button class="btn-primary" id="loginBtn" onclick="login()">Sign In</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ DASHBOARD ═══════════ -->
+<div class="dashboard" id="dashboard">
+  <div class="wrap">
+    <div class="welcome-bar">
+      <div>
+        <h2 id="welcomeGreeting">Welcome</h2>
+        <p class="sub" id="welcomeSub">Today's cause list is ready.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="today" id="todayDate"></div>
+        <button class="btn-secondary" id="refreshBtn" onclick="loadDashboard()" title="Re-fetch live data from the sheet">⟳ Refresh</button>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card"><div class="num" id="cardTotal">—</div><div class="lbl">Today's Cause List</div></div>
+      <div class="card updated"><div class="num" id="cardUpdated">—</div><div class="lbl">Updated Today</div></div>
+      <div class="card pending"><div class="num" id="cardPending">—</div><div class="lbl">Pending Updates</div></div>
+      <div class="card overdue"><div class="num" id="cardOverdue">—</div><div class="lbl">Overdue Cases</div></div>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search by Case Title, Case No., CNR, Department or Court..." onkeydown="if(event.key==='Enter')runSearch()">
+      <button onclick="runSearch()">Search</button>
+      <button class="btn-secondary" onclick="clearSearch()">Clear</button>
+    </div>
+
+    <div id="searchResultsWrap" class="table-wrap" style="display:none">
+      <h3 class="section-title">Search Results</h3>
+      <div id="searchResultsBody"></div>
+    </div>
+
+    <h3 class="section-title" style="color:var(--seal-red-ink)">⚠ Overdue Cases <span class="count-tag" id="overdueCountTag" style="display:none;background:var(--seal-red-ink)"></span></h3>
+    <div id="overdueListBody"></div>
+
+    <h3 class="section-title">Today's Cause List <span class="count-tag" id="listCountTag" style="display:none"></span></h3>
+    <div id="causeListBody"></div>
+  </div>
+</div>
+
+<!-- ═══════════ UPDATE MODAL ═══════════ -->
+<div class="overlay" id="updateOverlay">
+  <div class="modal">
+    <div class="modal-hd">
+      <h3>Update Proceedings</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-bd" id="modalBody"><!-- populated by openUpdateModal() --></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+//  CONFIG
+// ═══════════════════════════════════════════════
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzBUOVsADU_tZ0eHrzOgAN129G6v9F_GuH6398fRFQ5ftTKzLCHyj5UPpUC1_XKrAMw/exec';
+const IDLE_TIMEOUT_MIN = 30;
+
+// ═══════════════════════════════════════════════
+//  SESSION STATE (memory only — cleared on tab close,
+//  which is intentional for a shared-terminal operator login)
+// ═══════════════════════════════════════════════
+let SESSION = { token: null, role: null, fullName: null };
+let idleTimer = null;
+let CURRENT_CAUSE_LIST = [];
+let CURRENT_OVERDUE_LIST = [];
+let CURRENT_CASE_FOR_UPDATE = null;
+let SAVING = false;
+
+// ═══════════════════════════════════════════════
+//  API HELPER
+//  NOTE: Content-Type 'text/plain' avoids a CORS pre-flight
+//  request, which Apps Script web apps cannot answer.
+// ═══════════════════════════════════════════════
+async function api(action, payload) {
+  const body = Object.assign({ action, token: SESSION.token }, payload || {});
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) return { success: false, error: 'SERVER_UNAVAILABLE' };
+    return await res.json();
+  } catch (err) {
+    return { success: false, error: 'NETWORK_ERROR' };
+  }
+}
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function showToast(msg, isErr) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isErr ? ' err' : '');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ═══════════════════════════════════════════════
+//  LOGIN / LOGOUT
+// ═══════════════════════════════════════════════
+async function login() {
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const errEl = document.getElementById('loginError');
+  const btn = document.getElementById('loginBtn');
+  errEl.classList.remove('show');
+
+  if (!username || !password) {
+    errEl.textContent = 'Please enter both username and password.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  btn.disabled = true; btn.textContent = 'Signing in...';
+  const resp = await api('login', { username, password });
+  btn.disabled = false; btn.textContent = 'Sign In';
+
+  if (!resp.success) {
+    errEl.textContent = typeof resp.error === 'string' && resp.error.indexOf('Invalid') === 0
+      ? resp.error
+      : (resp.error === 'SERVER_UNAVAILABLE' || resp.error === 'NETWORK_ERROR')
+        ? 'Server unavailable. Please check your connection and try again.'
+        : (resp.error || 'Invalid Username or Password.');
+    errEl.classList.add('show');
+    return;
+  }
+
+  SESSION = { token: resp.token, role: resp.role, fullName: resp.fullName };
+  document.getElementById('loginPassword').value = '';
+  enterDashboard(resp.dashboard);
+}
+
+function enterDashboard(initialDashboard) {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('dashboard').classList.add('visible');
+  document.getElementById('logoutBtn').classList.add('visible');
+  renderWelcome();
+  resetIdleTimer();
+  // The dashboard (today's cause list + overdue list) travels inside the login
+  // response itself, so it's already here — no second network round trip needed
+  // before the operator sees anything. Falls back to a fresh fetch only if for
+  // some reason it wasn't included.
+  if (initialDashboard) setDashboardData(initialDashboard);
+  else loadDashboard();
+}
+
+function renderWelcome() {
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+  const name = SESSION.fullName ? SESSION.fullName.split(' ')[0] : 'Operator';
+  document.getElementById('welcomeGreeting').textContent = `${greeting}, ${name}`;
+  document.getElementById('welcomeSub').textContent = "Here is today's cause list and pending proceedings.";
+  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-IN', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+}
+
+async function logout(silent) {
+  if (SESSION.token) await api('logout', {});
+  SESSION = { token: null, role: null, fullName: null };
+  clearTimeout(idleTimer);
+  document.getElementById('dashboard').classList.remove('visible');
+  document.getElementById('logoutBtn').classList.remove('visible');
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginUsername').value = '';
+  closeModal();
+  if (silent) showToast('Session expired due to inactivity. Please log in again.', true);
+}
+
+// ═══════════════════════════════════════════════
+//  IDLE / SESSION TIMEOUT
+//  Client-side timer drives UX; the server independently
+//  expires the token regardless of what the client does.
+// ═══════════════════════════════════════════════
+function resetIdleTimer() {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => logout(true), IDLE_TIMEOUT_MIN * 60000);
+}
+['click','keydown','mousemove','touchstart'].forEach(ev =>
+  document.addEventListener(ev, () => { if (SESSION.token) resetIdleTimer(); })
+);
+
+// ═══════════════════════════════════════════════
+//  DASHBOARD DATA
+// ═══════════════════════════════════════════════
+function skeletonRows(n) {
+  let html = '<div class="skeleton-wrap">';
+  for (let i = 0; i < n; i++) {
+    html += `<div class="skeleton-row">
+      <div class="skel-bar" style="width:60%"></div><div class="skel-bar" style="width:80%"></div>
+      <div class="skel-bar" style="width:70%"></div><div class="skel-bar" style="width:90%"></div>
+      <div class="skel-bar" style="width:60%"></div><div class="skel-bar" style="width:75%"></div>
+      <div class="skel-bar" style="width:55%"></div></div>`;
+  }
+  return html + '</div>';
+}
+
+async function loadDashboard() {
+  document.getElementById('causeListBody').innerHTML = skeletonRows(6);
+  document.getElementById('overdueListBody').innerHTML = skeletonRows(3);
+  const btn = document.getElementById('refreshBtn');
+  if (btn) { btn.disabled = true; btn.textContent = '⟳ Refreshing...'; }
+
+  const resp = await api('getCauseList', {}); // one call returns cases + overdue + summary together
+  if (btn) { btn.disabled = false; btn.textContent = '⟳ Refresh'; }
+  if (!resp.success) return handleSessionError(resp);
+
+  setDashboardData(resp);
+}
+
+function setDashboardData(data) {
+  CURRENT_CAUSE_LIST = data.cases;
+  CURRENT_OVERDUE_LIST = data.overdue || [];
+  updateSummaryCards(data.summary);
+  renderCauseList(CURRENT_CAUSE_LIST);
+  renderOverdueList(CURRENT_OVERDUE_LIST);
+}
+
+function updateSummaryCards(summary) {
+  document.getElementById('cardTotal').textContent = summary.total;
+  document.getElementById('cardUpdated').textContent = summary.updated;
+  document.getElementById('cardPending').textContent = summary.pending;
+  document.getElementById('cardOverdue').textContent = summary.overdue != null ? summary.overdue : CURRENT_OVERDUE_LIST.length;
+  const tag = document.getElementById('listCountTag');
+  tag.style.display = 'inline-block';
+  tag.textContent = summary.total + ' case' + (summary.total === 1 ? '' : 's');
+  const oTag = document.getElementById('overdueCountTag');
+  const oCount = summary.overdue != null ? summary.overdue : CURRENT_OVERDUE_LIST.length;
+  oTag.style.display = 'inline-block';
+  oTag.textContent = oCount + ' case' + (oCount === 1 ? '' : 's');
+}
+
+function renderCauseList(list, justUpdatedCaseNo) {
+  const el = document.getElementById('causeListBody');
+  if (!list.length) {
+    el.innerHTML = '<div class="empty-state">No cases listed for today.</div>';
+    return;
+  }
+  el.innerHTML = `<div class="table-wrap"><table><thead><tr>
+    <th>Status</th><th>Court</th><th>Department</th><th>Case Title</th><th>Case ID</th><th>Next Hearing</th><th></th>
+  </tr></thead><tbody>` + list.map((c, i) => {
+    const noId = !c.caseId;
+    const disabled = c.status === 'Updated' || noId;
+    const btnTitle = noId ? 'title="No Case ID assigned in column P — this case cannot be updated until one is added."' : '';
+    return `
+    <tr>
+      <td><span class="status-pill ${c.status}${c.caseId===justUpdatedCaseNo?' stamp-in':''}">${c.status}</span></td>
+      <td>${escapeHtml(c.court)}</td>
+      <td>${escapeHtml(c.dept)}</td>
+      <td>${escapeHtml(c.title)}${c.caseNo ? `<br><span style="font-family:var(--font-mono);font-size:10.5px;color:var(--muted)">Case No. ${escapeHtml(c.caseNo)}</span>` : ''}</td>
+      <td class="mono">${c.caseId ? escapeHtml(c.caseId) : '<span style="color:var(--seal-red-ink)">— missing —</span>'}</td>
+      <td class="mono">${formatDate(c.nextHearing)}</td>
+      <td><button class="btn-update" ${disabled?'disabled':''} ${btnTitle} onclick="openUpdateModal(CURRENT_CAUSE_LIST[${i}])">Update</button></td>
+    </tr>`;
+  }).join('') + `</tbody></table></div>`;
+}
+
+function formatDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return '—';
+  return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+function renderOverdueList(list) {
+  const el = document.getElementById('overdueListBody');
+  if (!list.length) {
+    el.innerHTML = '<div class="empty-state" style="margin-bottom:32px">No overdue cases. Everything is on schedule.</div>';
+    return;
+  }
+  el.innerHTML = `<div class="table-wrap"><table><thead><tr>
+    <th>Days Overdue</th><th>Court</th><th>Department</th><th>Case Title</th><th>Case ID</th><th>Was Due</th><th></th>
+  </tr></thead><tbody>` + list.map((c, i) => {
+    const noId = !c.caseId;
+    const btnTitle = noId ? 'title="No Case ID assigned in column P — this case cannot be updated until one is added."' : '';
+    return `
+    <tr>
+      <td><span class="overdue-badge">${c.daysOverdue} day${c.daysOverdue===1?'':'s'}</span></td>
+      <td>${escapeHtml(c.court)}</td>
+      <td>${escapeHtml(c.dept)}</td>
+      <td>${escapeHtml(c.title)}${c.caseNo ? `<br><span style="font-family:var(--font-mono);font-size:10.5px;color:var(--muted)">Case No. ${escapeHtml(c.caseNo)}</span>` : ''}</td>
+      <td class="mono">${c.caseId ? escapeHtml(c.caseId) : '<span style="color:var(--seal-red-ink)">— missing —</span>'}</td>
+      <td class="mono">${formatDate(c.nextHearing)}</td>
+      <td><button class="btn-update" ${noId?'disabled':''} ${btnTitle} onclick="openUpdateModal(CURRENT_OVERDUE_LIST[${i}])">Update</button></td>
+    </tr>`;
+  }).join('') + `</tbody></table></div>`;
+}
+
+// ═══════════════════════════════════════════════
+//  SEARCH (independent of Today's Cause List)
+// ═══════════════════════════════════════════════
+async function runSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (!q) return;
+  const wrap = document.getElementById('searchResultsWrap');
+  const body = document.getElementById('searchResultsBody');
+  wrap.style.display = 'block';
+  body.innerHTML = skeletonRows(3);
+
+  const resp = await api('search', { query: q });
+  if (!resp.success) return handleSessionError(resp);
+
+  if (!resp.results.length) {
+    body.innerHTML = '<div class="empty-state">No matching cases found.</div>';
+    return;
+  }
+  body.innerHTML = `<table><thead><tr>
+    <th>Court</th><th>Department</th><th>Case Title</th><th>Case ID</th><th>Next Hearing</th><th></th>
+  </tr></thead><tbody>` + resp.results.map((c, i) => {
+    const noId = !c.caseId;
+    const btnTitle = noId ? 'title="No Case ID assigned in column P — this case cannot be updated until one is added."' : '';
+    return `
+    <tr>
+      <td>${escapeHtml(c.court)}</td>
+      <td>${escapeHtml(c.dept)}</td>
+      <td>${escapeHtml(c.title)}${c.caseNo ? `<br><span style="font-family:var(--font-mono);font-size:10.5px;color:var(--muted)">Case No. ${escapeHtml(c.caseNo)}</span>` : ''}</td>
+      <td class="mono">${c.caseId ? escapeHtml(c.caseId) : '<span style="color:var(--seal-red-ink)">— missing —</span>'}</td>
+      <td class="mono">${formatDate(c.nextHearing)}</td>
+      <td><button class="btn-update" ${noId?'disabled':''} ${btnTitle} onclick='openUpdateModal(${JSON.stringify(c).replace(/'/g,"&#39;")})'>Update</button></td>
+    </tr>`;
+  }).join('') + `</tbody></table>`;
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchResultsWrap').style.display = 'none';
+}
+
+// ═══════════════════════════════════════════════
+//  UPDATE MODAL
+// ═══════════════════════════════════════════════
+function openUpdateModal(c) {
+  CURRENT_CASE_FOR_UPDATE = c;
+  const todayISO = new Date().toISOString().slice(0,10);
+  document.getElementById('modalBody').innerHTML = `
+    <div class="ro-grid">
+      <div class="ro-field full"><label>Case Title</label><p style="font-family:var(--font-body)">${escapeHtml(c.title)}</p></div>
+      <div class="ro-field"><label>Department</label><p style="font-family:var(--font-body)">${escapeHtml(c.dept)}</p></div>
+      <div class="ro-field"><label>Court</label><p style="font-family:var(--font-body)">${escapeHtml(c.court)}</p></div>
+      <div class="ro-field"><label>Case ID</label><p>${escapeHtml(c.caseId) || '—'}</p></div>
+      <div class="ro-field"><label>Case Number</label><p>${escapeHtml(c.caseNo) || '—'}</p></div>
+      <div class="ro-field full"><label>Previous Proceedings</label><p style="font-family:var(--font-body)">${escapeHtml(c.lastProc) || '—'}</p></div>
+      <div class="ro-field"><label>Current Next Hearing Date</label><p>${formatDate(c.nextHearing)}</p></div>
+    </div>
+    <div class="field">
+      <label>Proceedings (editable)</label>
+      <textarea id="upd_proceedings" placeholder="Enter today's proceedings..."></textarea>
+    </div>
+    <div class="field">
+      <label>Next Hearing Date (editable)</label>
+      <input type="date" id="upd_nextHearing" min="${todayISO}" value="${todayISO}">
+    </div>
+    <div class="error-msg" id="updateError"></div>
+    <div class="modal-actions">
+      <button class="btn-primary" id="saveBtn" style="width:auto;padding:11px 22px" onclick="saveProceedings()">Save</button>
+      <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+    </div>`;
+  document.getElementById('updateOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('updateOverlay').classList.remove('open');
+  CURRENT_CASE_FOR_UPDATE = null;
+}
+
+async function saveProceedings() {
+  if (SAVING) return; // prevent duplicate submissions
+  const proceedings = document.getElementById('upd_proceedings').value.trim();
+  const nextHearing = document.getElementById('upd_nextHearing').value;
+  const errEl = document.getElementById('updateError');
+  errEl.classList.remove('show');
+
+  if (!proceedings || !nextHearing) {
+    errEl.textContent = 'Please fill in both Proceedings and Next Hearing Date.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  SAVING = true;
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true; btn.textContent = 'Saving...';
+
+  const savedCase = CURRENT_CASE_FOR_UPDATE;
+  if (!savedCase.caseId) {
+    errEl.textContent = 'This case has no Case ID (column P) and cannot be updated. Please assign one in the sheet first.';
+    errEl.classList.add('show');
+    btn.disabled = false; btn.textContent = 'Save';
+    SAVING = false;
+    return;
+  }
+  const resp = await api('updateProceedings', {
+    caseId: savedCase.caseId,
+    proceedings, nextHearingDate: nextHearing
+  });
+
+  SAVING = false;
+  if (!resp.success) {
+    btn.disabled = false; btn.textContent = 'Save';
+    if (resp.error === 'SESSION_EXPIRED' || resp.error === 'SESSION_NOT_FOUND' || resp.error === 'NO_TOKEN') {
+      return handleSessionError(resp);
+    }
+    errEl.textContent = resp.error === 'SERVER_UNAVAILABLE' || resp.error === 'NETWORK_ERROR'
+      ? 'Could not reach the server. Check your connection and try again.'
+      : 'Save failed. Please try again.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  closeModal();
+  showToast('Proceedings Updated Successfully.');
+
+  // ── Optimistic UI update: patch the row locally and re-render instantly,
+  // instead of waiting on a full getCauseList round-trip. The write already
+  // succeeded server-side, so this reflects reality exactly. ──
+  let handled = false;
+
+  const causeIdx = CURRENT_CAUSE_LIST.findIndex(c => c.caseId === savedCase.caseId);
+  if (causeIdx !== -1) {
+    CURRENT_CAUSE_LIST[causeIdx] = Object.assign({}, CURRENT_CAUSE_LIST[causeIdx], {
+      status: 'Updated', lastProc: proceedings, nextHearing: new Date(nextHearing).toISOString()
+    });
+    handled = true;
+  }
+
+  // The new hearing date is always today or later (the date picker enforces this),
+  // so a case that was overdue is, by definition, no longer overdue after a save —
+  // remove it from the overdue list rather than waiting for a re-fetch to notice.
+  const overdueIdx = CURRENT_OVERDUE_LIST.findIndex(c => c.caseId === savedCase.caseId);
+  if (overdueIdx !== -1) {
+    CURRENT_OVERDUE_LIST.splice(overdueIdx, 1);
+    handled = true;
+    // If the new date happens to be today, it now belongs on the cause list too.
+    if (nextHearing === new Date().toISOString().slice(0, 10) && causeIdx === -1) {
+      CURRENT_CAUSE_LIST.push(Object.assign({}, savedCase, {
+        status: 'Updated', lastProc: proceedings, nextHearing: new Date(nextHearing).toISOString()
+      }));
+    }
+  }
+
+  if (handled) {
+    const total = CURRENT_CAUSE_LIST.length;
+    const updated = CURRENT_CAUSE_LIST.filter(c => c.status === 'Updated').length;
+    updateSummaryCards({ total, updated, pending: total - updated, overdue: CURRENT_OVERDUE_LIST.length });
+    renderCauseList(CURRENT_CAUSE_LIST, savedCase.caseId);
+    renderOverdueList(CURRENT_OVERDUE_LIST);
+  } else {
+    // Case came from Search (not in either list) — a full reload is the correct source of truth here.
+    loadDashboard();
+  }
+  showPostSaveOptions();
+}
+
+function showPostSaveOptions() {
+  const wrap = document.getElementById('causeListBody');
+  const bar = document.createElement('div');
+  bar.className = 'success-actions';
+  bar.innerHTML = `
+    <button class="btn-update" onclick="updateNextPending()">Next Pending Case</button>
+    <button class="btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Return to Cause List</button>
+    <button class="btn-secondary" onclick="document.getElementById('searchInput').focus()">Search Another Case</button>`;
+  wrap.prepend(bar);
+}
+
+function updateNextPending() {
+  const next = CURRENT_CAUSE_LIST.find(c => c.status === 'Pending');
+  if (next) openUpdateModal(next);
+  else showToast('No more pending cases for today.');
+}
+
+// ═══════════════════════════════════════════════
+//  SESSION / NETWORK ERROR HANDLING
+// ═══════════════════════════════════════════════
+function handleSessionError(resp) {
+  if (resp.error === 'SESSION_EXPIRED' || resp.error === 'SESSION_NOT_FOUND' || resp.error === 'NO_TOKEN') {
+    logout(true);
+  } else if (resp.error === 'FORBIDDEN') {
+    showToast('You do not have access to this module.', true);
+    logout(false);
+  } else {
+    showToast('Server unavailable. Please try again.', true);
+  }
+}
+
+document.getElementById('updateOverlay').addEventListener('click', e => {
+  if (e.target.id === 'updateOverlay') closeModal();
+});
+</script>
+</body>
+</html>
