@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<title>Operator Portal — District Litigation Office Kupwara</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#F2EAD3; --paper-2:#EAE0C0; --paper-3:#E2D6AE;
+  --ink:#1B2340; --ink-2:#262F52; --ink-3:#323C68;
+  --brass:#A6763D; --brass-light:#C99A56; --brass-dim:#8C6633;
+  --seal-red:#A13A2E; --seal-red-ink:#7E2C22;
+  --seal-green:#2E6B4E; --seal-green-ink:#204B37;
+  --text:#211C10; --muted:#7C7358; --line:#D7C7A0; --line-soft:#E4D8B4;
+  --white:#FFFDF7; --danger:#A13A2E;
+  --font-display:'Fraunces',serif; --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+}
+body{font-family:var(--font-body);background:
+    radial-gradient(ellipse at top left, rgba(166,118,61,0.07), transparent 55%),
+    radial-gradient(ellipse at bottom right, rgba(27,35,64,0.06), transparent 55%),
+    var(--paper);
+  color:var(--text);min-height:100vh}
+.topbar{background:var(--ink);border-bottom:3px solid var(--brass);padding:14px 26px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 2px 0 rgba(166,118,61,0.35)}
+.topbar .brand{display:flex;align-items:center;gap:12px}
+.seal-emblem{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--brass-light),var(--brass) 60%,var(--brass-dim));display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(233,213,163,0.25), inset 0 -2px 4px rgba(0,0,0,0.25)}
+.seal-emblem svg{width:20px;height:20px}
+.topbar h1{font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--white);letter-spacing:0.2px}
+.topbar p{font-family:var(--font-mono);font-size:9.5px;color:var(--brass-light);letter-spacing:1.8px;text-transform:uppercase;margin-top:2px}
+.role-badge{font-family:var(--font-mono);font-size:10px;background:rgba(233,213,163,0.15);color:var(--brass-light);padding:4px 10px;border-radius:20px;border:1px solid rgba(233,213,163,0.3);margin-right:10px;text-transform:uppercase;letter-spacing:0.5px}
+.btn-logout{background:rgba(255,255,255,0.08);border:1px solid rgba(233,213,163,0.3);color:var(--white);padding:8px 16px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;display:none;font-family:var(--font-body);transition:background .15s}
+.btn-logout:hover{background:rgba(255,255,255,0.16)}
+.btn-logout.visible{display:inline-block}
+.wrap{max-width:1160px;margin:0 auto;padding:30px 20px 60px}
+.login-screen{min-height:82vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.login-card{background:var(--white);border-radius:4px;box-shadow:0 30px 70px rgba(27,35,64,0.28);width:100%;max-width:390px;overflow:hidden;position:relative;border:1px solid var(--line)}
+.login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:repeating-linear-gradient(90deg,var(--brass) 0 10px,var(--brass-light) 10px 20px)}
+.login-card .hd{background:var(--ink);padding:34px 28px 24px;text-align:center;border-bottom:3px solid var(--brass);position:relative}
+.login-card .hd .seal-emblem{width:54px;height:54px;margin:0 auto 14px;box-shadow:0 0 0 3px rgba(233,213,163,0.2), inset 0 -3px 6px rgba(0,0,0,0.3), 0 6px 16px rgba(0,0,0,0.35)}
+.login-card .hd .seal-emblem svg{width:28px;height:28px}
+.login-card .hd h2{font-family:var(--font-display);font-weight:700;color:var(--white);font-size:19px}
+.login-card .hd p{font-family:var(--font-mono);font-size:10px;color:var(--brass-light);letter-spacing:1.6px;text-transform:uppercase;margin-top:6px}
+.login-card .bd{padding:30px 28px 28px}
+.field{margin-bottom:17px}
+.field label{display:block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--muted);margin-bottom:6px;font-family:var(--font-body)}
+.field input,.field select{width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:5px;font-size:14px;font-family:var(--font-body);background:var(--paper);color:var(--text);transition:border-color .15s, box-shadow .15s}
+.field input:focus,.field select:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(166,118,61,0.15)}
+.btn-primary{background:var(--ink);color:var(--white);font-weight:600;font-size:13.5px;padding:13px;border-radius:5px;border:1.5px solid var(--ink);cursor:pointer;width:100%;transition:all .15s;font-family:var(--font-body);letter-spacing:0.3px}
+.btn-primary:hover{background:var(--ink-3);border-color:var(--ink-3)}
+.btn-primary:disabled{opacity:0.55;cursor:not-allowed}
+.error-msg{background:#F6E4E0;color:var(--seal-red-ink);border:1px solid #E3B7AC;border-radius:5px;padding:10px 14px;font-size:13px;margin-bottom:16px;display:none}
+.error-msg.show{display:block}
+.dashboard{display:none}
+.dashboard.visible{display:block}
+.welcome-bar{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;margin-bottom:26px;padding-bottom:18px;border-bottom:2px solid var(--line)}
+.welcome-bar h2{font-family:var(--font-display);font-weight:700;font-size:26px;color:var(--ink);letter-spacing:0.2px}
+.welcome-bar .sub{font-size:13px;color:var(--muted);margin-top:4px;font-family:var(--font-body)}
+.welcome-bar .today{font-family:var(--font-mono);font-size:11px;color:var(--brass-dim);background:rgba(166,118,61,0.1);border:1px solid rgba(166,118,61,0.3);padding:6px 12px;border-radius:20px;letter-spacing:0.3px;white-space:nowrap}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.card{background:var(--white);border-radius:4px;border:1px solid var(--line);border-top:3px solid var(--ink-3);padding:20px;text-align:center;box-shadow:0 2px 10px rgba(27,35,64,0.05);position:relative}
+.card .num{font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.card .lbl{font-size:11px;color:var(--muted);margin-top:5px;letter-spacing:0.8px;text-transform:uppercase;font-family:var(--font-body)}
+.card.pending{border-top-color:var(--brass)}
+.card.pending .num{color:var(--brass-dim)}
+.card.updated{border-top-color:var(--seal-green)}
+.card.updated .num{color:var(--seal-green-ink)}
+.card.overdue{border-top-color:var(--seal-red)}
+.card.overdue .num{color:var(--seal-red-ink)}
+.overdue-badge{font-family:var(--font-mono);font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:3px;background:rgba(161,58,46,0.1);color:var(--seal-red-ink);border:1.5px solid rgba(161,58,46,0.35);white-space:nowrap}
+.search-box{background:var(--white);border-radius:4px;border:1px solid var(--line);padding:16px 18px;margin-bottom:26px;display:flex;gap:10px;flex-wrap:wrap}
+.search-box input{flex:1;min-width:220px;padding:10px 14px;border:1.5px solid var(--line);border-radius:5px;font-size:14px;font-family:var(--font-body);background:var(--paper)}
+.search-box input:focus{outline:none;border-color:var(--brass)}
+.search-box button{background:var(--ink);color:var(--white);border:1.5px solid var(--ink);padding:10px 20px;border-radius:5px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:background .15s}
+.search-box button:hover{background:var(--ink-3)}
+.btn-add-case{background:var(--seal-green-ink);border-color:var(--seal-green-ink)}
+.btn-add-case:hover{background:var(--seal-green)}
+.section-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:10px;justify-content:space-between}
+.section-title .count-tag{font-family:var(--font-mono);font-size:11px;background:var(--ink);color:var(--white);padding:2px 9px;border-radius:20px;font-weight:500}
+table{width:100%;border-collapse:collapse;background:var(--white);border-radius:4px;overflow:hidden;box-shadow:0 2px 10px rgba(27,35,64,0.05);border:1px solid var(--line)}
+th{background:var(--ink);color:var(--brass-light);font-size:10.5px;text-transform:uppercase;letter-spacing:0.7px;padding:12px;text-align:left;font-family:var(--font-body);font-weight:600}
+td{padding:12px;font-size:13px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+td.mono{font-family:var(--font-mono);font-size:12px;color:var(--ink-2)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(166,118,61,0.045)}
+.status-pill{font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:3px;display:inline-block;text-transform:uppercase;letter-spacing:0.6px;border:1.5px solid transparent;font-family:var(--font-mono)}
+.status-pill.exparte{background:rgba(161,58,46,0.08);color:var(--seal-red-ink);border-color:rgba(161,58,46,0.35)}
+.status-pill.active{background:rgba(46,107,78,0.08);color:var(--seal-green-ink);border-color:rgba(46,107,78,0.4)}
+.status-pill.disposed{background:rgba(140,102,51,0.1);color:var(--brass-dim);border-color:rgba(140,102,51,0.35)}
+.btn-update{background:var(--white);color:var(--ink);border:1.5px solid var(--ink);padding:7px 15px;border-radius:4px;font-size:11.5px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:0.4px;font-family:var(--font-body);transition:all .15s}
+.btn-update:hover:not(:disabled){background:var(--ink);color:var(--white)}
+.btn-update:disabled{opacity:0.4;cursor:not-allowed;border-color:var(--line)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px;background:var(--white);border-radius:4px;border:1px dashed var(--line)}
+.table-wrap{margin-bottom:32px;overflow-x:auto}
+.skeleton-row{display:grid;grid-template-columns:90px 1fr 1fr 2fr 1fr 1fr 90px;gap:12px;padding:13px 12px;border-bottom:1px solid var(--line-soft);background:var(--white)}
+.skel-bar{height:12px;border-radius:3px;background:linear-gradient(90deg,var(--paper-3) 25%,var(--paper-2) 37%,var(--paper-3) 63%);background-size:400% 100%;animation:shimmer 1.3s ease-in-out infinite}
+@keyframes shimmer{0%{background-position:100% 0}100%{background-position:0 0}}
+.skeleton-wrap{border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.overlay{position:fixed;inset:0;background:rgba(27,35,64,0.55);z-index:300;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+.overlay.open{display:flex}
+.modal{background:var(--white);border-radius:6px;max-width:640px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 40px 90px rgba(0,0,0,0.4)}
+.modal-hd{background:var(--ink);padding:18px 24px;border-radius:6px 6px 0 0;border-bottom:3px solid var(--brass);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
+.modal-hd h3{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--white)}
+.modal-close{background:none;border:none;color:rgba(255,255,255,0.6);font-size:22px;cursor:pointer;line-height:1}
+.modal-close:hover{color:var(--white)}
+.modal-bd{padding:24px}
+.ro-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:16px}
+.ro-field label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--brass-dim);display:block;margin-bottom:3px;font-family:var(--font-body)}
+.ro-field p{font-size:13px;color:var(--text);font-family:var(--font-mono)}
+.ro-field.full{grid-column:1/-1}
+.field textarea{width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:5px;font-size:13px;font-family:var(--font-body);min-height:74px;resize:vertical;background:var(--paper)}
+.field textarea:focus,.field input[type=date]:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(166,118,61,0.15)}
+.field input[type=date]{width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:5px;font-size:14px;font-family:var(--font-body);background:var(--paper)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--line)}
+.btn-secondary{background:var(--paper);color:var(--text);border:1.5px solid var(--line);padding:10px 16px;border-radius:5px;font-size:13px;cursor:pointer;font-family:var(--font-body);font-weight:500;transition:all .15s}
+.btn-secondary:hover{background:var(--paper-3)}
+.history-box{background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:14px 16px;margin-bottom:20px;max-height:220px;overflow-y:auto}
+.history-item{padding:10px 0;border-bottom:1px solid var(--line-soft);font-size:12.5px}
+.history-item:last-child{border-bottom:none}
+.history-item .meta{font-family:var(--font-mono);font-size:10.5px;color:var(--muted);margin-bottom:3px}
+.admin-only-tag{font-family:var(--font-mono);font-size:9.5px;color:var(--brass-dim);text-transform:uppercase;letter-spacing:0.5px;margin-left:6px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--seal-green-ink);color:var(--white);padding:13px 24px;border-radius:6px;font-size:13px;font-weight:600;box-shadow:0 10px 28px rgba(0,0,0,0.3);z-index:400;display:none;font-family:var(--font-body)}
+.toast.show{display:block;animation:toastIn .25s ease}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+.toast.err{background:var(--seal-red-ink)}
+.spinner{text-align:center;padding:34px;color:var(--muted);font-size:13px;font-family:var(--font-body)}
+@media(max-width:680px){.cards{grid-template-columns:1fr}.ro-grid{grid-template-columns:1fr}.field-row{grid-template-columns:1fr}.skeleton-row{grid-template-columns:1fr 1fr}.welcome-bar{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="seal-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="#1B2340" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l-3 6a4 4 0 0 0 8 0l-3-6M19 8l-3 6a4 4 0 0 0 8 0l-3-6M5 8h14M8 21h8"/></svg></div>
+    <div>
+      <h1>Case Management Portal</h1>
+      <p>District Litigation Office · Kupwara</p>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center">
+    <span class="role-badge" id="roleBadge" style="display:none"></span>
+    <button class="btn-logout" id="logoutBtn" onclick="logout()">Sign Out</button>
+  </div>
+</div>
+
+<!-- ═══════════ LOGIN SCREEN ═══════════ -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="hd">
+      <div class="seal-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="#F2EAD3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l-3 6a4 4 0 0 0 8 0l-3-6M19 8l-3 6a4 4 0 0 0 8 0l-3-6M5 8h14M8 21h8"/></svg></div>
+      <h2>Sign In</h2>
+      <p>Operator &amp; Admin Access</p>
+    </div>
+    <div class="bd">
+      <div class="error-msg" id="loginError"></div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="loginEmail" autocomplete="username" onkeydown="if(event.key==='Enter')document.getElementById('loginPassword').focus()">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="loginPassword" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
+      </div>
+      <button class="btn-primary" id="loginBtn" onclick="login()">Sign In</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ DASHBOARD ═══════════ -->
+<div class="dashboard" id="dashboard">
+  <div class="wrap">
+    <div class="welcome-bar">
+      <div>
+        <h2 id="welcomeGreeting">Welcome</h2>
+        <p class="sub" id="welcomeSub">Today's cause list is ready.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="today" id="todayDate"></div>
+        <button class="btn-secondary" id="refreshBtn" onclick="loadDashboard()" title="Re-fetch live data">⟳ Refresh</button>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card"><div class="num" id="cardTotal">—</div><div class="lbl">Today's Cause List</div></div>
+      <div class="card overdue"><div class="num" id="cardOverdue">—</div><div class="lbl">Overdue Cases</div></div>
+      <div class="card pending"><div class="num" id="cardExparte">—</div><div class="lbl">In Ex-parte</div></div>
+      <div class="card updated"><div class="num" id="cardTotalActive">—</div><div class="lbl">Total Active Cases</div></div>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search by Case Title, Case No., CNR, Department or Court..." onkeydown="if(event.key==='Enter')runSearch()">
+      <button onclick="runSearch()">Search</button>
+      <button class="btn-secondary" onclick="clearSearch()">Clear</button>
+      <button class="btn-primary btn-add-case" id="addCaseBtn" style="width:auto;display:none" onclick="openAddCaseModal()">+ Add New Case</button>
+    </div>
+
+    <div id="searchResultsWrap" class="table-wrap" style="display:none">
+      <h3 class="section-title">Search Results</h3>
+      <div id="searchResultsBody"></div>
+    </div>
+
+    <h3 class="section-title" style="color:var(--seal-red-ink)">⚠ Overdue Cases <span class="count-tag" id="overdueCountTag" style="display:none;background:var(--seal-red-ink)"></span></h3>
+    <div id="overdueListBody"></div>
+
+    <h3 class="section-title">Today's Cause List <span class="count-tag" id="listCountTag" style="display:none"></span></h3>
+    <div id="causeListBody"></div>
+  </div>
+</div>
+
+<!-- ═══════════ UPDATE MODAL ═══════════ -->
+<div class="overlay" id="updateOverlay">
+  <div class="modal">
+    <div class="modal-hd">
+      <h3 id="modalTitle">Update Case</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-bd" id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+//  CONFIG — replace these two with your real Supabase
+//  project values (Project Settings -> API in the dashboard).
+//  The anon key is safe to expose client-side; it only ever
+//  works within the RLS policies you've defined.
+// ═══════════════════════════════════════════════
+const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';       // e.g. https://xxxxx.supabase.co
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const IDLE_TIMEOUT_MIN = 30;
+
+let SESSION = { user: null, role: null, fullName: null, approved: false };
+let idleTimer = null;
+let CURRENT_CAUSE_LIST = [];
+let CURRENT_OVERDUE_LIST = [];
+let CURRENT_CASE_FOR_UPDATE = null;
+let SAVING = false;
+
+const EXPARTE_RE = /(ex[\s-]?part[a-z]*)/i;
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function showToast(msg, isErr) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isErr ? ' err' : '');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+function formatDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return '—';
+  return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+function todayISO() { return new Date().toISOString().slice(0, 10); }
+
+// ═══════════════════════════════════════════════
+//  LOGIN / LOGOUT (Supabase Auth)
+// ═══════════════════════════════════════════════
+async function login() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const errEl = document.getElementById('loginError');
+  const btn = document.getElementById('loginBtn');
+  errEl.classList.remove('show');
+
+  if (!email || !password) {
+    errEl.textContent = 'Please enter both email and password.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  btn.disabled = true; btn.textContent = 'Signing in...';
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  btn.disabled = false; btn.textContent = 'Sign In';
+
+  if (error) {
+    errEl.textContent = 'Invalid email or password.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  const { data: profile, error: profErr } = await sb
+    .from('profiles')
+    .select('full_name, role, approved')
+    .eq('id', data.user.id)
+    .single();
+
+  if (profErr || !profile) {
+    errEl.textContent = 'Could not load your profile. Contact the admin.';
+    errEl.classList.add('show');
+    await sb.auth.signOut();
+    return;
+  }
+
+  if (!profile.approved) {
+    errEl.textContent = 'Your account is pending admin approval.';
+    errEl.classList.add('show');
+    await sb.auth.signOut();
+    return;
+  }
+
+  SESSION = { user: data.user, role: profile.role, fullName: profile.full_name, approved: true };
+  document.getElementById('loginPassword').value = '';
+  enterDashboard();
+}
+
+async function checkExistingSession() {
+  const { data } = await sb.auth.getSession();
+  if (!data.session) return;
+  const { data: profile } = await sb
+    .from('profiles')
+    .select('full_name, role, approved')
+    .eq('id', data.session.user.id)
+    .single();
+  if (profile && profile.approved) {
+    SESSION = { user: data.session.user, role: profile.role, fullName: profile.full_name, approved: true };
+    enterDashboard();
+  }
+}
+
+function enterDashboard() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('dashboard').classList.add('visible');
+  document.getElementById('logoutBtn').classList.add('visible');
+  const badge = document.getElementById('roleBadge');
+  badge.style.display = 'inline-block';
+  badge.textContent = SESSION.role;
+  if (SESSION.role === 'admin') document.getElementById('addCaseBtn').style.display = 'inline-block';
+  renderWelcome();
+  resetIdleTimer();
+  loadDashboard();
+}
+
+function renderWelcome() {
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+  const name = SESSION.fullName ? SESSION.fullName.split(' ')[0] : (SESSION.role === 'admin' ? 'Admin' : 'Operator');
+  document.getElementById('welcomeGreeting').textContent = `${greeting}, ${name}`;
+  document.getElementById('welcomeSub').textContent = "Here is today's cause list and pending proceedings.";
+  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-IN', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+}
+
+async function logout() {
+  await sb.auth.signOut();
+  SESSION = { user: null, role: null, fullName: null, approved: false };
+  clearTimeout(idleTimer);
+  document.getElementById('dashboard').classList.remove('visible');
+  document.getElementById('logoutBtn').classList.remove('visible');
+  document.getElementById('roleBadge').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginEmail').value = '';
+  closeModal();
+}
+
+function resetIdleTimer() {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => { logout(); showToast('Session ended due to inactivity. Please log in again.', true); }, IDLE_TIMEOUT_MIN * 60000);
+}
+['click', 'keydown', 'mousemove', 'touchstart'].forEach(ev =>
+  document.addEventListener(ev, () => { if (SESSION.user) resetIdleTimer(); })
+);
+
+// ═══════════════════════════════════════════════
+//  DASHBOARD DATA
+// ═══════════════════════════════════════════════
+function skeletonRows(n) {
+  let html = '<div class="skeleton-wrap">';
+  for (let i = 0; i < n; i++) {
+    html += `<div class="skeleton-row">
+      <div class="skel-bar" style="width:60%"></div><div class="skel-bar" style="width:80%"></div>
+      <div class="skel-bar" style="width:70%"></div><div class="skel-bar" style="width:90%"></div>
+      <div class="skel-bar" style="width:60%"></div><div class="skel-bar" style="width:75%"></div>
+      <div class="skel-bar" style="width:55%"></div></div>`;
+  }
+  return html + '</div>';
+}
+
+async function loadDashboard() {
+  document.getElementById('causeListBody').innerHTML = skeletonRows(6);
+  document.getElementById('overdueListBody').innerHTML = skeletonRows(3);
+  const btn = document.getElementById('refreshBtn');
+  if (btn) { btn.disabled = true; btn.textContent = '⟳ Refreshing...'; }
+
+  const today = todayISO();
+
+  const [causeRes, overdueRes, totalRes, exparteRes] = await Promise.all([
+    sb.from('case_diary').select('*').eq('next_hearing_date', today).order('court_name'),
+    sb.from('case_diary').select('*').lt('next_hearing_date', today).neq('case_status', 'Disposed/Dismissed').order('next_hearing_date'),
+    sb.from('case_diary').select('id', { count: 'exact', head: true }).neq('case_status', 'Disposed/Dismissed'),
+    sb.from('case_diary').select('id', { count: 'exact', head: true }).eq('exparte_status', 'Ex-parte')
+  ]);
+
+  if (btn) { btn.disabled = false; btn.textContent = '⟳ Refresh'; }
+
+  if (causeRes.error || overdueRes.error) {
+    showToast('Could not load cases. Check your connection.', true);
+    return;
+  }
+
+  CURRENT_CAUSE_LIST = causeRes.data || [];
+  CURRENT_OVERDUE_LIST = (overdueRes.data || []).map(c => ({
+    ...c,
+    daysOverdue: Math.max(1, Math.round((new Date(today) - new Date(c.next_hearing_date)) / 86400000))
+  }));
+
+  document.getElementById('cardTotal').textContent = CURRENT_CAUSE_LIST.length;
+  document.getElementById('cardOverdue').textContent = CURRENT_OVERDUE_LIST.length;
+  document.getElementById('cardExparte').textContent = exparteRes.count != null ? exparteRes.count : '—';
+  document.getElementById('cardTotalActive').textContent = totalRes.count != null ? totalRes.count : '—';
+
+  const tag = document.getElementById('listCountTag');
+  tag.style.display = 'inline-block';
+  tag.textContent = CURRENT_CAUSE_LIST.length + ' case' + (CURRENT_CAUSE_LIST.length === 1 ? '' : 's');
+  const oTag = document.getElementById('overdueCountTag');
+  oTag.style.display = 'inline-block';
+  oTag.textContent = CURRENT_OVERDUE_LIST.length + ' case' + (CURRENT_OVERDUE_LIST.length === 1 ? '' : 's');
+
+  renderCauseList(CURRENT_CAUSE_LIST);
+  renderOverdueList(CURRENT_OVERDUE_LIST);
+}
+
+function statusPillClass(c) {
+  if (c.case_status === 'Disposed/Dismissed') return 'disposed';
+  if (c.exparte_status === 'Ex-parte') return 'exparte';
+  return 'active';
+}
+function statusPillLabel(c) {
+  if (c.case_status === 'Disposed/Dismissed') return 'Disposed';
+  if (c.exparte_status === 'Ex-parte') return 'Ex-parte';
+  return 'Active';
+}
+
+function renderCauseList(list) {
+  const el = document.getElementById('causeListBody');
+  if (!list.length) { el.innerHTML = '<div class="empty-state">No cases listed for today.</div>'; return; }
+  el.innerHTML = `<div class="table-wrap"><table><thead><tr>
+    <th>Status</th><th>Court</th><th>Department</th><th>Case Title</th><th>CNR</th><th>Next Hearing</th><th></th>
+  </tr></thead><tbody>` + list.map((c, i) => `
+    <tr>
+      <td><span class="status-pill ${statusPillClass(c)}">${statusPillLabel(c)}</span></td>
+      <td>${escapeHtml(c.court_name)}</td>
+      <td>${escapeHtml(c.department)}</td>
+      <td>${escapeHtml(c.case_title)}</td>
+      <td class="mono">${escapeHtml(c.cnr_case_no) || '—'}</td>
+      <td class="mono">${formatDate(c.next_hearing_date)}</td>
+      <td><button class="btn-update" onclick="openUpdateModal(CURRENT_CAUSE_LIST[${i}])">Update</button></td>
+    </tr>`).join('') + `</tbody></table></div>`;
+}
+
+function renderOverdueList(list) {
+  const el = document.getElementById('overdueListBody');
+  if (!list.length) { el.innerHTML = '<div class="empty-state" style="margin-bottom:32px">No overdue cases. Everything is on schedule.</div>'; return; }
+  el.innerHTML = `<div class="table-wrap"><table><thead><tr>
+    <th>Days Overdue</th><th>Court</th><th>Department</th><th>Case Title</th><th>CNR</th><th>Was Due</th><th></th>
+  </tr></thead><tbody>` + list.map((c, i) => `
+    <tr>
+      <td><span class="overdue-badge">${c.daysOverdue} day${c.daysOverdue === 1 ? '' : 's'}</span></td>
+      <td>${escapeHtml(c.court_name)}</td>
+      <td>${escapeHtml(c.department)}</td>
+      <td>${escapeHtml(c.case_title)}</td>
+      <td class="mono">${escapeHtml(c.cnr_case_no) || '—'}</td>
+      <td class="mono">${formatDate(c.next_hearing_date)}</td>
+      <td><button class="btn-update" onclick="openUpdateModal(CURRENT_OVERDUE_LIST[${i}])">Update</button></td>
+    </tr>`).join('') + `</tbody></table></div>`;
+}
+
+// ═══════════════════════════════════════════════
+//  SEARCH
+// ═══════════════════════════════════════════════
+let LAST_SEARCH_RESULTS = [];
+async function runSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (!q) return;
+  const wrap = document.getElementById('searchResultsWrap');
+  const body = document.getElementById('searchResultsBody');
+  wrap.style.display = 'block';
+  body.innerHTML = skeletonRows(3);
+
+  const { data, error } = await sb
+    .from('case_diary')
+    .select('*')
+    .or(`case_title.ilike.%${q}%,cnr_case_no.ilike.%${q}%,department.ilike.%${q}%,court_name.ilike.%${q}%`)
+    .limit(25);
+
+  if (error) { body.innerHTML = '<div class="empty-state">Search failed. Try again.</div>'; return; }
+  LAST_SEARCH_RESULTS = data || [];
+  if (!LAST_SEARCH_RESULTS.length) { body.innerHTML = '<div class="empty-state">No matching cases found.</div>'; return; }
+
+  body.innerHTML = `<table><thead><tr>
+    <th>Court</th><th>Department</th><th>Case Title</th><th>CNR</th><th>Next Hearing</th><th></th>
+  </tr></thead><tbody>` + LAST_SEARCH_RESULTS.map((c, i) => `
+    <tr>
+      <td>${escapeHtml(c.court_name)}</td>
+      <td>${escapeHtml(c.department)}</td>
+      <td>${escapeHtml(c.case_title)}</td>
+      <td class="mono">${escapeHtml(c.cnr_case_no) || '—'}</td>
+      <td class="mono">${formatDate(c.next_hearing_date)}</td>
+      <td><button class="btn-update" onclick="openUpdateModal(LAST_SEARCH_RESULTS[${i}])">Update</button></td>
+    </tr>`).join('') + `</tbody></table>`;
+}
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchResultsWrap').style.display = 'none';
+}
+
+// ═══════════════════════════════════════════════
+//  UPDATE MODAL (operator fields + admin-only fields + history)
+// ═══════════════════════════════════════════════
+async function openUpdateModal(c) {
+  CURRENT_CASE_FOR_UPDATE = c;
+  document.getElementById('modalTitle').textContent = 'Update Case';
+  const isAdmin = SESSION.role === 'admin';
+
+  document.getElementById('modalBody').innerHTML = `
+    <div class="ro-grid">
+      <div class="ro-field full"><label>Case Title</label><p style="font-family:var(--font-body)">${escapeHtml(c.case_title)}</p></div>
+      <div class="ro-field"><label>Department</label><p style="font-family:var(--font-body)">${escapeHtml(c.department)}</p></div>
+      <div class="ro-field"><label>Court</label><p style="font-family:var(--font-body)">${escapeHtml(c.court_name)}</p></div>
+      <div class="ro-field"><label>Advocate</label><p>${escapeHtml(c.advocate_name) || '—'}</p></div>
+    </div>
+
+    <div id="historyBox" class="history-box"><div class="spinner">Loading previous proceedings...</div></div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>CNR / Case Number</label>
+        <input type="text" id="upd_cnr" value="${escapeHtml(c.cnr_case_no)}">
+      </div>
+      <div class="field">
+        <label>Next Hearing Date</label>
+        <input type="date" id="upd_nextHearing" value="${c.next_hearing_date || todayISO()}">
+      </div>
+    </div>
+    <div class="field">
+      <label>Last Proceedings (editable)</label>
+      <textarea id="upd_proceedings" placeholder="Enter today's proceedings...">${escapeHtml(c.last_proceedings)}</textarea>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Reply Status</label>
+        <select id="upd_replyStatus">
+          <option value="Filed" ${c.reply_status === 'Filed' ? 'selected' : ''}>Filed</option>
+          <option value="Not Filed" ${c.reply_status === 'Not Filed' ? 'selected' : ''}>Not Filed</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Case Status</label>
+        <select id="upd_caseStatus">
+          <option value="Active" ${c.case_status === 'Active' ? 'selected' : ''}>Active</option>
+          <option value="Disposed/Dismissed" ${c.case_status === 'Disposed/Dismissed' ? 'selected' : ''}>Disposed/Dismissed</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Reply Status Detail</label>
+      <input type="text" id="upd_replyStatusDetail" value="${escapeHtml(c.reply_status_detail)}" placeholder="Optional note, e.g. FILED">
+    </div>
+
+    ${isAdmin ? `
+    <div class="section-title" style="font-size:14px;margin-top:10px">Admin-Only Fields <span class="admin-only-tag">visible to admin only</span></div>
+    <div class="field-row">
+      <div class="field"><label>Case Title</label><input type="text" id="upd_caseTitle" value="${escapeHtml(c.case_title)}"></div>
+      <div class="field"><label>Department</label><input type="text" id="upd_department" value="${escapeHtml(c.department)}"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Court Name</label><input type="text" id="upd_courtName" value="${escapeHtml(c.court_name)}"></div>
+      <div class="field"><label>Advocate Name</label><input type="text" id="upd_advocateName" value="${escapeHtml(c.advocate_name)}"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Contesting Party</label><input type="text" id="upd_contestingParty" value="${escapeHtml(c.contesting_party)}"></div>
+      <div class="field"><label>Case Type</label><input type="text" id="upd_caseType" value="${escapeHtml(c.case_type)}"></div>
+    </div>
+    ` : ''}
+
+    <div class="error-msg" id="updateError"></div>
+    <div class="modal-actions">
+      <button class="btn-primary" id="saveBtn" style="width:auto;padding:11px 22px" onclick="saveCase()">Save</button>
+      <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+      ${isAdmin ? `<button class="btn-secondary" style="border-color:var(--seal-red-ink);color:var(--seal-red-ink)" onclick="deleteCase(${c.id})">Delete Case</button>` : ''}
+    </div>`;
+  document.getElementById('updateOverlay').classList.add('open');
+  loadCaseHistory(c.id);
+}
+
+async function loadCaseHistory(caseId) {
+  const box = document.getElementById('historyBox');
+  const { data, error } = await sb
+    .from('case_history')
+    .select('*')
+    .eq('case_id', caseId)
+    .order('created_at', { ascending: false })
+    .limit(10);
+  if (error) { box.innerHTML = '<div class="empty-state">Could not load history.</div>'; return; }
+  if (!data || !data.length) { box.innerHTML = '<div class="empty-state">No previous proceedings recorded yet.</div>'; return; }
+  box.innerHTML = data.map(h => `
+    <div class="history-item">
+      <div class="meta">${formatDate(h.created_at)} · Hearing was ${formatDate(h.hearing_date)} · by ${escapeHtml(h.updated_by) || 'unknown'}</div>
+      <div>${escapeHtml(h.proceedings_summary)}</div>
+    </div>`).join('');
+}
+
+async function saveCase() {
+  if (SAVING) return;
+  const errEl = document.getElementById('updateError');
+  errEl.classList.remove('show');
+
+  const proceedings = document.getElementById('upd_proceedings').value.trim();
+  const nextHearing = document.getElementById('upd_nextHearing').value;
+  if (!proceedings || !nextHearing) {
+    errEl.textContent = 'Please fill in both Proceedings and Next Hearing Date.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  SAVING = true;
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true; btn.textContent = 'Saving...';
+
+  const updatedBy = SESSION.fullName || SESSION.user.email;
+
+  const payload = {
+    cnr_case_no: document.getElementById('upd_cnr').value.trim(),
+    last_proceedings: proceedings,
+    next_hearing_date: nextHearing,
+    reply_status: document.getElementById('upd_replyStatus').value,
+    reply_status_detail: document.getElementById('upd_replyStatusDetail').value.trim(),
+    case_status: document.getElementById('upd_caseStatus').value,
+    exparte_status: EXPARTE_RE.test(proceedings) ? 'Ex-parte' : 'Not in Ex-parte',
+    updated_by: updatedBy
+  };
+
+  if (SESSION.role === 'admin') {
+    payload.case_title = document.getElementById('upd_caseTitle').value.trim();
+    payload.department = document.getElementById('upd_department').value.trim();
+    payload.court_name = document.getElementById('upd_courtName').value.trim();
+    payload.advocate_name = document.getElementById('upd_advocateName').value.trim();
+    payload.contesting_party = document.getElementById('upd_contestingParty').value.trim();
+    payload.case_type = document.getElementById('upd_caseType').value.trim();
+  }
+
+  const { error } = await sb.from('case_diary').update(payload).eq('id', CURRENT_CASE_FOR_UPDATE.id);
+
+  SAVING = false;
+  btn.disabled = false; btn.textContent = 'Save';
+
+  if (error) {
+    errEl.textContent = 'Save failed: ' + error.message;
+    errEl.classList.add('show');
+    return;
+  }
+
+  closeModal();
+  showToast('Case updated successfully.');
+  loadDashboard();
+}
+
+async function deleteCase(id) {
+  if (!confirm('Permanently delete this case? This cannot be undone.')) return;
+  const { error } = await sb.from('case_diary').delete().eq('id', id);
+  if (error) { showToast('Delete failed: ' + error.message, true); return; }
+  closeModal();
+  showToast('Case deleted.');
+  loadDashboard();
+}
+
+function closeModal() {
+  document.getElementById('updateOverlay').classList.remove('open');
+  CURRENT_CASE_FOR_UPDATE = null;
+}
+
+// ═══════════════════════════════════════════════
+//  ADD NEW CASE (admin only)
+// ═══════════════════════════════════════════════
+function openAddCaseModal() {
+  document.getElementById('modalTitle').textContent = 'Add New Case';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="field-row">
+      <div class="field"><label>Case Title *</label><input type="text" id="new_caseTitle"></div>
+      <div class="field"><label>CNR / Case Number</label><input type="text" id="new_cnr"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Department *</label><input type="text" id="new_department"></div>
+      <div class="field"><label>Court Name *</label><input type="text" id="new_courtName"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Advocate Name</label><input type="text" id="new_advocateName"></div>
+      <div class="field"><label>Case Type</label><input type="text" id="new_caseType"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Contesting Party</label><input type="text" id="new_contestingParty"></div>
+      <div class="field"><label>Next Hearing Date *</label><input type="date" id="new_nextHearing" value="${todayISO()}"></div>
+    </div>
+    <div class="field">
+      <label>Subject Matter</label>
+      <textarea id="new_subjectMatter" placeholder="Brief subject matter..."></textarea>
+    </div>
+    <div class="error-msg" id="updateError"></div>
+    <div class="modal-actions">
+      <button class="btn-primary" id="saveBtn" style="width:auto;padding:11px 22px" onclick="saveNewCase()">Add Case</button>
+      <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+    </div>`;
+  document.getElementById('updateOverlay').classList.add('open');
+}
+
+async function saveNewCase() {
+  const errEl = document.getElementById('updateError');
+  errEl.classList.remove('show');
+
+  const caseTitle = document.getElementById('new_caseTitle').value.trim();
+  const department = document.getElementById('new_department').value.trim();
+  const courtName = document.getElementById('new_courtName').value.trim();
+  const nextHearing = document.getElementById('new_nextHearing').value;
+
+  if (!caseTitle || !department || !courtName || !nextHearing) {
+    errEl.textContent = 'Please fill in all required fields (marked *).';
+    errEl.classList.add('show');
+    return;
+  }
+
+  const cnr = document.getElementById('new_cnr').value.trim();
+  const payload = {
+    case_title: caseTitle,
+    department, court_name: courtName,
+    next_hearing_date: nextHearing,
+    advocate_name: document.getElementById('new_advocateName').value.trim(),
+    case_type: document.getElementById('new_caseType').value.trim(),
+    contesting_party: document.getElementById('new_contestingParty').value.trim(),
+    subject_matter: document.getElementById('new_subjectMatter').value.trim(),
+    cnr_case_no: cnr,
+    reply_status: 'Not Filed',
+    case_status: 'Active',
+    exparte_status: 'Not in Ex-parte',
+    case_id: cnr || ('CASE-' + Date.now()),
+    updated_by: SESSION.fullName || SESSION.user.email
+  };
+
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true; btn.textContent = 'Adding...';
+  const { error } = await sb.from('case_diary').insert(payload);
+  btn.disabled = false; btn.textContent = 'Add Case';
+
+  if (error) {
+    errEl.textContent = 'Could not add case: ' + error.message;
+    errEl.classList.add('show');
+    return;
+  }
+
+  closeModal();
+  showToast('New case added.');
+  loadDashboard();
+}
+
+document.getElementById('updateOverlay').addEventListener('click', e => {
+  if (e.target.id === 'updateOverlay') closeModal();
+});
+
+checkExistingSession();
+</script>
+</body>
+</html>
