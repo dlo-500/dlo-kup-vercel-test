@@ -1,0 +1,72 @@
+{
+  "name": "District Litigation Office Kupwara",
+  "short_name": "DLO Kupwara",
+  "description": "Official case management app for the District Litigation Office, Kupwara \u2014 track cases, hearings, and litigation statistics.",
+  "start_url": "/dlo-kupwaraa/index.html",
+  "scope": "/dlo-kupwaraa/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0D1B2A",
+  "theme_color": "#1B2A4A",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "My Cases",
+      "short_name": "Cases",
+      "url": "/dlo-kupwaraa/index.html#live-data",
+      "icons": [
+        {
+          "src": "logo.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Upcoming Hearings",
+      "short_name": "Hearings",
+      "url": "/dlo-kupwaraa/index.html#hearings",
+      "icons": [
+        {
+          "src": "logo.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Case History",
+      "short_name": "History",
+      "url": "/dlo-kupwaraa/index.html#history",
+      "icons": [
+        {
+          "src": "logo.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
